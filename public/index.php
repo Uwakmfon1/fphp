@@ -5,11 +5,6 @@ const BASE_PATH = __DIR__.'/../';
 // require BASE_PATH.'function.php';
 require_once './../function.php';
 
-
-
-
-
-
 // require base_path("Database.php"); 
 // require base_path("Response.php");
 // require base_path("router.php");
@@ -29,8 +24,9 @@ require_once './../function.php';
 // }
 
 spl_autoload_register(function($class){
-    require base_path("Core/" .$class . '.php');
+    $data = base_path("Core/" .$class . '.php'); 
+    // require
+    dd($data);
 });
 
 require base_path('router.php');
-
