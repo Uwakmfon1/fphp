@@ -1,32 +1,26 @@
 <?php
 
-const BASE_PATH = __DIR__.'/../';
+session_start();
 
-// require BASE_PATH.'function.php';
-require_once './../function.php';
+const BASE_PATH  = __DIR__ . '/../';
 
-// require base_path("Database.php"); 
-// require base_path("Response.php");
-// require base_path("router.php");
-
-// $config = require(BASE_PATH."config.php");
-
-// $uri = parse_url($_SERVER['REQUEST_URI'])['path']; 
+require BASE_PATH."Core/function.php";
 
 
-// $db = new Database($config['database']); 
-
-
-// if(array_key_exists($uri, $routes)){
-//     require $routes[$uri];
-// }else{
-//  abort("./views/404");  
-// }
-
-spl_autoload_register(function($class){
-    $data = base_path("Core/" .$class . '.php'); 
-    // require
-    dd($data);
+spl_autoload_register(function($class) {
+    $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+    
+    require base_path("{$class}.php");
 });
 
-require base_path('router.php');
+require base_path("bootstrap.php");
+$router = new \Core\Router();
+
+$routes = require base_path('routes.php');
+
+$uri = parse_url($_SERVER['REQUEST_URI'])['path'];
+$method = $_POST['method'] ?? $_SERVER['REQUEST_METHOD'];
+
+$router->route($uri,$method);
+
+

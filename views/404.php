@@ -1,10 +1,10 @@
 <?php
 
-require "./views/partials/head.php";
 
+require base_path("views/partials/head.php");
 ?>
 
-  <?php require("./views/partials/nav.php")?>
+  <?php require base_path("./views/partials/nav.php")?>
 
  
   <main>
@@ -15,5 +15,8 @@ require "./views/partials/head.php";
 
     <p class="px-20">
         <a href="/">Go back home</a>
+    </p>
+    <p class="px-20">
+        <a href="/notes">Go back to notes</a>
     </p>
   </main>

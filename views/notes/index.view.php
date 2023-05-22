@@ -1,8 +1,8 @@
-
-<?php require base_path('views/partials/head.php') ?>
-<?php require base_path('views/partials/nav.php') ?>
-<?php require base_path('views/partials/banner.php') ?>
-
+<?php 
+  require base_path('views/partials/head.php'); 
+  require base_path('views/partials/nav.php'); 
+  require base_path('views/partials/banner.php');
+ ?>
 
 <div class="min-h-full">
 
@@ -20,10 +20,11 @@
       <?php endforeach ?>
       </ul>
       <p class="mt-8">
-        <a href="/note-create" class="text-blue-400 hover:underline">Create Note</a>
+        <a href="/notes/create" class="text-blue-400 hover:underline">Create Note</a>
       </p>
     </div>
   </main>
 
+  
   
   <?php require base_path('views/partials/footer.php') ?>

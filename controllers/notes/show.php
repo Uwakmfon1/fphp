@@ -1,12 +1,13 @@
 <?php
 
-$db = new Database($config['database']); 
+use Core\Database;
+use Core\App;
 
-// $config = require('config.php');
-$config = require base_path('config.php');
-$db = new Database($config['database']);
+// $config = require base_path('config.php');
+// $db = new Database($config['database']); //replacing with code next line
 
-$currentUserId = 13;
+$db = App::resolve(Database::class);
+
 $heading = 'Note';
 
 /**
@@ -15,21 +16,16 @@ $heading = 'Note';
  * dont open note of another user with different id
  */
 
+$currentUserId = 13;
 
-// $note = $db->query('select * from notes where id = :id', ['id'=> $_GET['id'],
-// ])->find();
 
-$note = $db->query('select * from notes where id = :id', ['id'=> $_GET['id'],
+$note = $db->query('select * from notes where id = :id', [
+      'id' => $_GET['id']
 ])->findOrFail();
 
-authorize($note['user_id']==$currentUserId);
-
-
-require "views/notes/show.view.php";
+authorize($note['user_id'] === $currentUserId);
 
 view("notes/show.view.php", [
     'heading' => 'Note',
     'note' => $note
 ]);
-
-

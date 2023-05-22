@@ -1,4 +1,6 @@
 <?php
+namespace Core;
+use PDO;            //puts a '/' in front of all pdo class 
 
 class Database{
     public $connection;
@@ -7,7 +9,6 @@ class Database{
     public function __construct($config, $username='root', $password='')
     {
         $dsn = "mysql:" . (http_build_query($config,"",';')); 
-        // $dsn = "mysql:host=localhost;port=3306; dbname=myapp; user=root; charset=utf8mb4";
         $this->connection = new PDO($dsn,$username,$password,[
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
          ]);
@@ -43,7 +44,10 @@ class Database{
             return $result;
         }
     }
-
+    public function fetch(){
+        return $this->statement->fetch();
+    }
+     
     public function fetchAll(){
         return $this->statement->fetchAll();
     }
